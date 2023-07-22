@@ -5,11 +5,12 @@ class Drawer:
 
     def __init__(self, box_dim=60):
         self.box_dim = box_dim
-        self.border = box_dim
+        self.border = box_dim * 2.5
 
-        # Hacky dimensions (66 x 83 = 5478)
-        width = ((box_dim * 3.505) * 66)
-        height = ((box_dim * 3.505) * 83)
+        # 66 x 83 = 5478
+        game_size = (box_dim * 3) + (self.border / 2)
+        width = game_size * 66
+        height = game_size * 83
 
         self.d = draw.Drawing(width, height)
         self.d.append(draw.Rectangle(0, 0, width, height, fill="white"))  # background
