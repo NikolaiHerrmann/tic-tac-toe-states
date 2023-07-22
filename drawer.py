@@ -1,4 +1,3 @@
-
 import drawsvg as draw
 
 
@@ -7,13 +6,13 @@ class Drawer:
     def __init__(self, box_dim=60):
         self.box_dim = box_dim
         self.border = box_dim
-        
+
         # Hacky dimensions (66 x 83 = 5478)
         width = ((box_dim * 3.505) * 66)
         height = ((box_dim * 3.505) * 83)
 
         self.d = draw.Drawing(width, height)
-        self.d.append(draw.Rectangle(0, 0, width, height, fill="white")) # background
+        self.d.append(draw.Rectangle(0, 0, width, height, fill="white"))  # background
 
         self.init_cross()
         self.init_circle()
@@ -76,7 +75,7 @@ class Drawer:
             idx <<= 1
 
         return game
-    
+
     def draw(self, states, output_name):
         poster = draw.Group(stroke="black", stroke_width=3, fill="none")
 
@@ -88,8 +87,8 @@ class Drawer:
         for xs, os, _ in states:
             game = self.get_game(x, y, xs, os)
             poster.append(game)
-            
-            if x_count == 66 - 1:
+
+            if x_count == 65:
                 x = self.box_dim / 2
                 y += game_size
                 x_count = 0
@@ -99,4 +98,3 @@ class Drawer:
 
         self.d.append(poster)
         self.d.save_svg(f"{output_name}.svg")
-        return self.d
