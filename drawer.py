@@ -8,9 +8,9 @@ class Drawer:
         self.border = box_dim * 2.5
 
         # 66 x 83 = 5478
-        game_size = (box_dim * 3) + (self.border / 2)
-        width = game_size * 66
-        height = game_size * 83
+        self.game_size = (box_dim * 3) + (self.border / 2)
+        width = self.game_size * 66
+        height = self.game_size * 83
 
         self.d = draw.Drawing(width, height)
         self.d.append(draw.Rectangle(0, 0, width, height, fill="white"))  # background
@@ -31,14 +31,13 @@ class Drawer:
         self.circle_shape = draw.Circle(0, 0, circle_radius)
 
     def init_grid(self):
-        length = self.box_dim * 3
-
         self.grid = draw.Group()
 
+        length = self.box_dim * 3
         box = draw.Rectangle(0, 0, length, length)
+
         length_third = length / 3
         length_two_third = length * (2 / 3)
-
         line_1 = draw.Line(length_third, 0, length_third, length)
         line_2 = draw.Line(length_two_third, 0, length_two_third, length)
         line_3 = draw.Line(0, length_third, length, length_third)
@@ -83,7 +82,6 @@ class Drawer:
         x = self.box_dim / 2
         y = self.box_dim / 2
         x_count = 0
-        game_size = (self.box_dim * 3) + (self.border / 2)
 
         for xs, os, _ in states:
             game = self.get_game(x, y, xs, os)
@@ -91,10 +89,10 @@ class Drawer:
 
             if x_count == 65:
                 x = self.box_dim / 2
-                y += game_size
+                y += self.game_size
                 x_count = 0
             else:
-                x += game_size
+                x += self.game_size
                 x_count += 1
 
         self.d.append(poster)
